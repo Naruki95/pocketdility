@@ -1,0 +1,35 @@
+<h1>Add your new restaurant!</h1>
+
+<%= simple_form_for @restaurant do |f| %>
+  <div class="form-inputs">
+    <%= f.input :name,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "restaurant_name" }%>
+    <%= f.input :address,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "address" }%>
+    <%= f.input :speciality_id,
+                as: :radio_buttons,
+                required: true,
+                autofocus: true,
+                collection: Speciality.all %>
+    <%= f.input :description,
+                autofocus: true,
+                input_html: { autocomplete: "description" }%>
+    <%= f.input :telephone_number,
+            autofocus: true,
+            input_html: { autocomplete: "telephone_number" }%>
+    <%= f.input :website_url,
+        autofocus: true,
+        input_html: { autocomplete: "website_url" }%>
+    <%= f.input :description,
+            autofocus: true,
+            input_html: { autocomplete: "description" }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Add restaurant", class: 'btn btn-primary' %>
+  </div>
+<% end %>
