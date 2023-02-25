@@ -1,2 +1,5 @@
 <h1>Pages#home</h1>
+<% if user_signed_in? %>
+  <%= link_to "Add new Restaurant", new_restaurant_path %>
+<% end %>
 <p>Find me in app/views/pages/home.html.erb</p>
