@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_21_155805) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_170630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fidelity_cards", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.integer "points", default: 0
+    t.boolean "free_dish", default: false
+    t.string "qr_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_fidelity_cards_on_restaurant_id"
+    t.index ["user_id"], name: "index_fidelity_cards_on_user_id"
+  end
 
   create_table "restaurants", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_155805) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "fidelity_cards", "restaurants"
+  add_foreign_key "fidelity_cards", "users"
   add_foreign_key "restaurants", "specialities"
   add_foreign_key "restaurants", "users"
   add_foreign_key "users", "statuses"

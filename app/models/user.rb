@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :status
+  has_many :restaurants
+  has_many :fidelity_cards
 end
