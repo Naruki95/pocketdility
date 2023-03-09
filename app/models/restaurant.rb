@@ -2,9 +2,9 @@ class Restaurant < ApplicationRecord
   belongs_to :user
   belongs_to :speciality
 
-  def qr_code
-    path_to_self = Rails.application.routes.url_helpers.restaurant_path(self)
-    RQRCode::QRCode.new(path_to_self)
+  def qr_code_to_new_fidelity_card
+    path_to_new_fidelity_card = Rails.application.routes.url_helpers.new_restaurant_fidelity_card_path(self)
+    RQRCode::QRCode.new(path_to_new_fidelity_card)
                    .as_svg(
                      color: "000",
                      shape_rendering: "crispEdges",
