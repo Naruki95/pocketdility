@@ -28,7 +28,7 @@ class FidelityCard < ApplicationRecord
   end
 
   def qr_code_fidelity_card
-    path_to_new_fidelity_card = "http://localhost:3000/fidelities/#{Rails.application.routes.url_helpers.fidelity_card_path(self)}"
+    path_to_fidelity_card = Rails.application.routes.url_helpers.fidelity_card_url(self)
     RQRCode::QRCode.new(path_to_new_fidelity_card)
                    .as_svg(
                      color: "000",
