@@ -4,8 +4,6 @@ class FidelityCard < ApplicationRecord
   belongs_to :user
   belongs_to :restaurant
 
-  after_create :qr_code
-
   def free_dish_remaining?
     free_dish
   end
@@ -19,7 +17,7 @@ class FidelityCard < ApplicationRecord
     (self.points % 5).zero?
   end
 
-  def new_free_dish
+  def new_free_ish
     self.free_dish_remaining += 1
     save
   end
@@ -29,15 +27,15 @@ class FidelityCard < ApplicationRecord
     save
   end
 
-  def qr_code
-    qr = RQRCode::QRCode.new("http://localhost:3000/fidelities/#{id}/")
-    self.qr_code = qr.as_svg(
-      color: "000",
-      shape_rendering: "crispEdges",
-      module_size: 5,
-      standalone: true,
-      use_path: true
-    )
-    save
+  def qr_code_fidelity_card
+    path_to_new_fidelity_card = "http://localhost:3000/fidelities/#{Rails.application.routes.url_helpers.fidelity_card_path(self)}"
+    RQRCode::QRCode.new(path_to_new_fidelity_card)
+                   .as_svg(
+                     color: "000",
+                     shape_rendering: "crispEdges",
+                     module_size: 5,
+                     standalone: true,
+                     use_path: true
+                   )
   end
 end
