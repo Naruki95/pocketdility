@@ -41,6 +41,8 @@ Rails.application.configure do
 
   # default url port
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # Allows full url path with _url helper
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 
   config.action_mailer.perform_caching = false
 
