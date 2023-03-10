@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_170630) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_192143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_170630) do
     t.bigint "restaurant_id", null: false
     t.integer "points", default: 0
     t.boolean "free_dish", default: false
-    t.string "qr_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_fidelity_cards_on_restaurant_id"

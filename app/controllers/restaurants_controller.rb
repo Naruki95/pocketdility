@@ -17,7 +17,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-
+    @fidelity_card = FidelityCard.new
   end
 
   def destroy

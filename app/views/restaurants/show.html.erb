@@ -1,2 +1,25 @@
 <h1><%= @restaurant.name %></h1>
+<% if user_signed_in? %>
+  <% if current_user == @restaurant.user %>
+    <p>
+      I am the owner of the restaurant
+    </p>
+  <% elsif current_user.fidelity_cards.find_by(restaurant: @restaurant).nil? %>
+    <%= simple_form_for([@restaurant, @fidelity_card]) do |f| %>
+      <%= f.submit "Carte fidelité", class: "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <p>
+      Already got my fidelity Card
+    </p>
+    <% qr_code_fidelity_card = current_user.fidelity_cards.find_by(restaurant: @restaurant) %>
+    <%= render '/shared/qrmodal', modal: qr_code_fidelity_card, button_text: "Ta carte de fidelitée" %>
+  <% end %>
+
+<% else %>
+  <%= render 'shared/button_subscribe', button_text: 'Carte fidelité' %>
+<% end %>
+<p>
+  Restaurant QR
+</p>
 <%= @restaurant.qr_code_to_new_fidelity_card.html_safe %>
